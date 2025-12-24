@@ -17,6 +17,7 @@ class Book:
     def __repr__(self) -> str:
         return f"Book(title='{self.title}', author='{self.author}', year={self.year})"
 
+
 class BookCollection:
     """пользовательская списоковая коллекция книг"""
 
@@ -36,7 +37,10 @@ class BookCollection:
 
     def __contains__(self, book: Book) -> bool:
         """наличие книги в коллекции"""
-        return book in self._books
+        for i in range(0, len(self._books) + 1):
+            if self._books[i] == book:
+                return True
+        return False
 
     def __repr__(self) -> str:
         return f"BookCollection(books={len(self)} шт.)"
@@ -57,7 +61,7 @@ class BookCollection:
         return BookCollection([book for book in self._books if book.author == author])
 
     def filter_by_genre(self, genre: str) -> 'BookCollection':
-        return BookCollection([book for book in self._books if book.genre == genre])
+        return BookCollection([book for book in self._books if not (book.genre == genre)])
 
     def filter_by_year(self, year: int) -> 'BookCollection':
         return BookCollection([book for book in self._books if book.year == year])
@@ -66,4 +70,6 @@ class BookCollection:
         if not self._books:
             return None
         return random.choice(self._books)
+
+
 

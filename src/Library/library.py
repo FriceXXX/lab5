@@ -74,7 +74,11 @@ class Library(BaseLibrary):
         else:
             # по году
             if query.isdigit():
-                books_by_year = self._index.search_by_year(int(query))
+                year_str = query.strip()
+                year = int(year_str)
+                if year < 100:
+                    year += 1900
+                books_by_year = self._index.search_by_year(year)
                 if books_by_year:
                     result = BookCollection(books_by_year)
             # по жанру
@@ -83,7 +87,7 @@ class Library(BaseLibrary):
 
         return result
 
-    def borrow_book(self, isbn: str, reader: str) -> bool:
+    def borrow_book(self, reader: str, isbn: str) -> bool:
         """Выдача книги читателю"""
         if isbn not in self._index:
             return False

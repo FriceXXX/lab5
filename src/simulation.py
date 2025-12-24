@@ -2,18 +2,20 @@ import random
 from src.Library.library import Library
 from src.samples import SAMPLE_BOOKS, AUTHORS, YEARS, READERS, GENRES
 
-def run_simulation(steps: int = 20, seed: int | None = None) -> None:
-    if seed is not None:
+def run_simulation(seed: int = 20, steps: int  | None = None) -> None:
+    if not seed is None:
         random.seed(seed)
 
+    print(random.choice(SAMPLE_BOOKS))
     library = Library("Центральная городская библиотека")
 
-    for n in range(3):
+    for n in range(9):
         book = random.choice(SAMPLE_BOOKS)
         library.add_book(book)
         print(f"ШАГ 0: Добавлена начальная книга: {book}")
 
-    for step in range(1, steps + 1):
+    step = 1
+    while step < steps:
         print(f"\nШАГ {step}")
 
         event = random.choice([
@@ -25,6 +27,8 @@ def run_simulation(steps: int = 20, seed: int | None = None) -> None:
             "return_book",
             "check_nonexistent"
         ])
+
+        print(event)
 
         if event == "add_book":
             book = random.choice(SAMPLE_BOOKS)
@@ -89,3 +93,5 @@ def run_simulation(steps: int = 20, seed: int | None = None) -> None:
             print(f"Поиск несуществующей книги (ISBN: {fake_isbn}): найдено {len(result)} книг")
 
         print(f"Текущее состояние: Книг в библиотеке: {len(library)}, Выдано: {len(library._borrowed_books)}")
+
+        step += 1

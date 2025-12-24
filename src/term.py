@@ -25,3 +25,4 @@ def terminal():
                     print(f"Добавлена новая книга: {book}")
                 else:
                     print(f"Попытка добавить существующую книгу: {book.title}")
+        if cmd == 'remove':
