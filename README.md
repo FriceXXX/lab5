@@ -15,7 +15,7 @@
 **Воспроизводство**: запустить симуляцию с ```steps=10, seed=2```
 
 **Отладка**: 
-установлен breakpoint на строке 60 book.py (метод search_by_genre):
+установлен breakpoint на строке 64 book.py (метод search_by_genre):
 ```return BookCollection([book for book in self._books if book.genre != genre])```
 В отладчике видно, что заданный genre = 'Сказка' не совпадает с жанром книг. Следовательно строка возвращает истину.
 
